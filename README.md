@@ -42,62 +42,47 @@ start key/value consumer
 create order stream
 
 ```
-CREATE STREAM ORDERS (order_id VARCHAR, product_name VARCHAR, number INT, total_price DOUBLE)
-    WITH (kafka_topic='ORDERS', value_format='json', partitions=1);
+CREATE STREAM ORDERS (order_id VARCHAR, product_name VARCHAR, number INT, total_price DOUBLE) WITH (kafka_topic='ORDERS', value_format='json', partitions=1);
 ```
 
 add orders
 
 ```
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('1', 'book', 3, 57.66);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('1', 'book', 3, 57.66);
 	
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('2', 'book', 2, 13.50);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('2', 'book', 2, 13.50);
 	
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('3', 'laptop', 1, 1000.99);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('3', 'laptop', 1, 1000.99);
 	
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('4', 'laptop', 2, 2000.00);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('4', 'laptop', 2, 2000.00);
 	
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('5', 'book', 6, 110.99);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('5', 'book', 6, 110.99);
 
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('6', 'headset', 1, 99.99);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('6', 'headset', 1, 99.99);
 	
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('7', 'laptop', 1, 500.99);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('7', 'laptop', 1, 500.99);
 	
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('8', 'book', 2, 20.17);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('8', 'book', 2, 20.17);
 
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('9', 'headset', 5, 400.14);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('9', 'headset', 5, 400.14);
 	
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('10', 'book', 1, 5.99);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('10', 'book', 1, 5.99);
 	
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('11', 'book', 5, 55.00);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('11', 'book', 5, 55.00);
 
-INSERT INTO ORDERS (order_id, product_name, number, total_price) 
-	VALUES ('12', 'book', 2, 15.00);
+INSERT INTO ORDERS (order_id, product_name, number, total_price) VALUES ('12', 'book', 2, 15.00);
 ```
 
 create aggregation table
 
 ```
-CREATE TABLE PRODUCT_TOTAL_PRICE AS
-    SELECT product_name, SUM(total_price) AS sum_total_price FROM ORDERS GROUP BY product_name;
+CREATE TABLE PRODUCT_TOTAL_PRICE AS SELECT product_name, SUM(total_price) AS sum_total_price FROM ORDERS GROUP BY product_name;
 ```
 	
 create order payments
 
 ```
-CREATE STREAM PAYMENTS (order_id VARCHAR, payment_type VARCHAR)
-    WITH (kafka_topic='PAYMENTS', value_format='json', partitions=1);
+CREATE STREAM PAYMENTS (order_id VARCHAR, payment_type VARCHAR) WITH (kafka_topic='PAYMENTS', value_format='json', partitions=1);
 ```
 	
 create joined stream
@@ -112,7 +97,6 @@ CREATE STREAM ORDERS_AND_PAYMENTS AS
 add orders and payments
 
 ```
-INSERT INTO PAYMENTS (order_id, payment_type) 
-	VALUES ('1', 'Paypal');
+INSERT INTO PAYMENTS (order_id, payment_type) VALUES ('1', 'Paypal');
 ```
    
